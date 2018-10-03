@@ -10,7 +10,7 @@ export default class  Messages extends Component {
         super(props);
 
         this.state ={
-            newMessage: 'Hello there...',
+            newMessage: 'Hello there!!!',
         }
 
         this.addTestMessages = this.addTestMessages.bind(this);
@@ -18,7 +18,7 @@ export default class  Messages extends Component {
     }
 
     renderMessage(message){
-        const text = message.body;
+        const text = message.body;1
         _.split(text, '\n')
         return <p dangerouslySetInnerHTML={{__html: _.get(message, 'body')}}></p>
     }
