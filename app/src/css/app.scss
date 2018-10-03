@@ -1,0 +1,215 @@
+@import 'https://fonts.googleapis.com/css?family=Abel';
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+body{
+    font-family: 'Abel', sans-serif;
+    color: #22a6b3;
+    font-size: 18px;
+}
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.app-messenger{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    .header{
+        height: 60px;
+        display: flex;
+        flex-direction: row;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        .left{
+            width: 200px;
+            .actions{
+                line-height: 80px;
+                padding: 0 10px;
+                button{
+                    
+                }
+            }
+        }
+        .content{
+            flex-grow: 1;
+            h2{ 
+                line-height: 50px;text-align: center;
+            }
+        }
+        .right{
+            width: 300px;
+            .user-bar{
+                display: flex;
+                justify-content: flex-end;
+                padding: 0 10px;
+                line-height: 50px;
+                .profile-name{
+                    padding-right: 10px;
+                }
+                .profile-image {
+                    line-height: 50px;
+                    img {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        margin: 10px 0 0 0;
+                    }
+                }
+            }
+        }
+    }
+    .main{
+        height: 100%;
+        display: flex;
+        overflow: hidden;
+        .sidebar-left{
+            border-right: 1px solid rgba(0, 0, 0, 0.05);
+            width: 200px;
+
+        }
+        .sidebar-right{
+            border-left: 1px solid rgba(0, 0, 0, 0.05);
+            width: 300px;
+            .title{
+                padding: 10px;
+            }
+        }
+        .content{
+            overflow: hidden;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            .messages{
+                flex-grow: 1; 
+            }
+            .messenger-input{
+                border-top: 1px solid rgba(0, 0, 0, 0.05);
+                height: 10%;
+                display: flex;
+                flex-direction: row;
+                .text-input{
+                    flex-grow: 1; 
+                    textarea{
+                        width: 100%;
+                        height: 100%;
+                        border:  0 none;
+                        padding: 8px;
+                    }
+
+                }
+                .actions{
+                    
+                    button.send{
+                        background-color: #22a6b3;
+                        color: white;
+                        border: 0 none;
+                        padding: 8px 15px;
+                        line-height: 50px;
+                        font-size: 15px; 
+                    }
+                }
+            }
+        }
+    }
+
+    .messages{
+        display: flex;
+        flex-direction: column;  
+        overflow-y: auto; 
+        .message{
+            display: flex;
+            margin: 20px;
+            flex-direction: row;
+            justify-content: flex-end;
+            .message-user-image{
+                img{
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%; 
+                }
+            }
+            .message-body{
+                padding-left: 10px;
+                .message-author{
+
+                }
+                .message-text{
+                    background: #22a6b3;
+                    color: white;
+                    padding: 10px;
+                    border-radius: 10px;
+                }
+            }
+            &.me{
+                justify-content: flex-start;
+                .message-text{
+                    background: #d1ccc0;
+                }
+            }
+        }
+    }
+
+}
+
+.channels {
+    .channel {
+        padding-bottom: 10px;
+        display: flex;
+        .user-image {
+            img{
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                margin-right: 10px; //cfvf gbcfkf
+            }
+        }
+
+        .channel-info {
+            flex-grow: 1;
+            h2 {
+                font-size: 14px;
+                font-weight: 600; 
+            }
+
+            p {
+                font-size: 14px;
+            }
+        }
+        &.active{
+            background: rgba(0, 0, 0, 0.05);
+        }
+    }
+}
+.members{
+    .member{
+        display: flex;
+        padding: 10px;
+        .user-image{
+            img{
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+            }
+
+        }
+        .member-info{
+            padding-left: 10px;
+            flex-grow: 1;
+            h2{
+                font-size: 14px;
+            }
+            p{
+                font-size: 14px; 
+            }
+        }
+    }
+}
+
+h2.title{
+    font-size: 30px;
+    font-weight: 600;
+}
