@@ -42,7 +42,7 @@ export default class Sender extends Component {
                 <div className='text-input'>
                     <textarea onKeyUp={(event)=>{
                         if(event.key  === 'Enter' && !event.shiftKey){
-                            this,this.handleSend()
+                            this.handleSend()
                         }
                     }} onChange={(event)=>{
                         this.setState({newMessage: _.get(event, 'target.value')})
