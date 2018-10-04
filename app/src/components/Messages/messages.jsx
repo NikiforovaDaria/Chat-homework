@@ -3,6 +3,7 @@ import avatar from "../../images/avatar.png";
 import classNames from "classnames";
 import _ from "lodash";
 import Sender from '../SenderMessage/sender'
+import ReactMarkdown from 'react-markdown'
 
 
 export default class  Messages extends Component {
@@ -66,7 +67,7 @@ export default class  Messages extends Component {
                                         {message.me ? 'You ' : message.author} says:
                                     </div>
                                     <div className='message-text'>
-                                        {this.renderMessage(message)}
+                                        <ReactMarkdown source={message.body}/>
                                     </div>
                                 </div>
                             </div>
