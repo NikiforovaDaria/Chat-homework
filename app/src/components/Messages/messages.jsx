@@ -3,6 +3,7 @@ import avatar from "../../images/avatar.png";
 import classNames from "classnames";
 import _ from "lodash";
 import Sender from '../SenderMessage/sender'
+import ReactMarkdown from 'react-markdown'
 
 
 export default class  Messages extends Component {
@@ -10,17 +11,17 @@ export default class  Messages extends Component {
         super(props);
 
         this.state ={
-            newMessage: 'Hello there...',
+            newMessage: 'Hello there!!!',
         }
 
         this.addTestMessages = this.addTestMessages.bind(this);
-        this.renderMessage = this.renderMessage.bind(this)
+        this.scrollMessagesToBottom = this.scrollMessagesToBottom.bind(this);
     }
 
-    renderMessage(message){
-        const text = message.body;
-        _.split(text, '\n')
-        return <p dangerouslySetInnerHTML={{__html: _.get(message, 'body')}}></p>
+    scrollMessagesToBottom() {
+        if(this.messagesRef) {
+            this.messagesRef.scrollTop = this.messagesRef.scrollHeight;
+        }
     }
 
     addTestMessages() {
@@ -47,6 +48,10 @@ export default class  Messages extends Component {
         this.addTestMessages()
     }
 
+    componentDidUpdate() {
+        this.scrollMessagesToBottom();
+    }
+
     render() {
         const {store} = this.props;
         const activeChannel = store.getActiveChannel();
@@ -54,7 +59,7 @@ export default class  Messages extends Component {
     
         return (
             <div className='content'>
-                <div className='messages'>
+                <div className='messages' ref={(ref) => this.messagesRef = ref}>
                     {messages.map((message, index) => {
                         return (
                             <div key={index} className={classNames('message', { 'me': message.me })}>
@@ -66,7 +71,7 @@ export default class  Messages extends Component {
                                         {message.me ? 'You ' : message.author} says:
                                     </div>
                                     <div className='message-text'>
-                                        {this.renderMessage(message)}
+                                        <ReactMarkdown source={(message.body).replace(/\n/g, '\n\n')}/>
                                     </div>
                                 </div>
                             </div>
