@@ -21,27 +21,29 @@ export default class Sender extends Component {
         
         const {store} = this.props;
         let {newMessage} = this.state;
-        const messageId = new ObjectID().toString();
-        const channel = store.getActiveChannel();
-        const channelId = _.get(channel, '_id', null);
-        const currentUser = store.getCurrentUser();
-        if (newMessage.length > 0) {
-            const message = {
-                _id: messageId,
-                channelId: channelId,
-                body: newMessage,
-                author: _.get(currentUser, 'name', null),
-                avatar: avatar, 
-                me: true,
-            }
-            store.addMessage(messageId, message);
+        if(_.trim(newMessage).length) {
+            const messageId = new ObjectID().toString();
+            const channel = store.getActiveChannel();
+            const channelId = _.get(channel, '_id', null);
+            const currentUser = store.getCurrentUser();
+            if (newMessage.length > 0) {
+                const message = {
+                    _id: messageId,
+                    channelId: channelId,
+                    body: newMessage,
+                    author: _.get(currentUser, 'name', null),
+                    avatar: avatar, 
+                    me: true,
+                }
+                store.addMessage(messageId, message);
 
-            this.setState({
-                newMessage: ''
-            })
-            if(this.state.showEmoji) {
-                this.showhideEmoji();
+                this.setState({
+                    newMessage: ''
+                })
             }
+        }
+        if(this.state.showEmoji) {
+            this.showhideEmoji();
         }
     }
     
