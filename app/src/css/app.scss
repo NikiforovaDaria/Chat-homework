@@ -121,6 +121,7 @@ body{
         flex-direction: column;  
         overflow-y: auto; 
         .message{
+            min-height: 50px;
             display: flex;
             margin: 20px;
             flex-direction: row;
@@ -133,6 +134,7 @@ body{
                 }
             }
             .message-body{
+                min-height: 50px;
                 padding-left: 10px;
                 .message-author{
 
@@ -147,6 +149,7 @@ body{
             &.me{
                 justify-content: flex-start;
                 .message-text{
+                    
                     background: #d1ccc0;
                 }
             }
