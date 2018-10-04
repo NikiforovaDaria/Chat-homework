@@ -15,15 +15,13 @@ export default class  Messages extends Component {
         }
 
         this.addTestMessages = this.addTestMessages.bind(this);
-        this.renderMessage = this.renderMessage.bind(this)
+        this.scrollMessagesToBottom = this.scrollMessagesToBottom.bind(this);
     }
 
-    renderMessage(message){
-        const text = _.get(message, 'body', '')
-        const html = _.split(text, '\n').map((m, key)=>{
-            return <p key={key} dangerouslySetInnerHTML={{ __html: m }}></p>
-        })
-        return html
+    scrollMessagesToBottom() {
+        if(this.messagesRef) {
+            this.messagesRef.scrollTop = this.messagesRef.scrollHeight;
+        }
     }
 
     addTestMessages() {
@@ -50,6 +48,10 @@ export default class  Messages extends Component {
         this.addTestMessages()
     }
 
+    componentDidUpdate() {
+        this.scrollMessagesToBottom();
+    }
+
     render() {
         const {store} = this.props;
         const activeChannel = store.getActiveChannel();
@@ -57,7 +59,7 @@ export default class  Messages extends Component {
     
         return (
             <div className='content'>
-                <div className='messages'>
+                <div className='messages' ref={(ref) => this.messagesRef = ref}>
                     {messages.map((message, index) => {
                         return (
                             <div key={index} className={classNames('message', { 'me': message.me })}>
@@ -69,7 +71,7 @@ export default class  Messages extends Component {
                                         {message.me ? 'You ' : message.author} says:
                                     </div>
                                     <div className='message-text'>
-                                        <ReactMarkdown source={message.body}/>
+                                        <ReactMarkdown source={(message.body).replace(/\n/g, '\n\n')}/>
                                     </div>
                                 </div>
                             </div>
