@@ -18,9 +18,11 @@ export default class  Messages extends Component {
     }
 
     renderMessage(message){
-        const text = message.body;1
-        _.split(text, '\n')
-        return <p dangerouslySetInnerHTML={{__html: _.get(message, 'body')}}></p>
+        const text = _.get(message, 'body', '')
+        const html = _.split(text, '\n').map((m, key)=>{
+            return <p key={key} dangerouslySetInnerHTML={{ __html: m }}></p>
+        })
+        return html
     }
 
     addTestMessages() {
