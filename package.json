@@ -1,0 +1,22 @@
+{
+  "name": "chat-homework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install:app": "cd app && npm install",
+    "install:server": "cd server && npm install",
+    "install": "npm run install:app && npm run install:server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NikiforovaDaria/Chat-homework.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NikiforovaDaria/Chat-homework/issues"
+  },
+  "homepage": "https://github.com/NikiforovaDaria/Chat-homework#readme"
+}

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { ObjectID } from '../../Helpers/objectid';
 import avatar from "../../images/avatar.png";
 import _ from "lodash";
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
 
 export default class Sender extends Component {
     constructor(props){
@@ -9,31 +11,52 @@ export default class Sender extends Component {
 
         this.state ={
             newMessage: 'Hello there...',
+            showEmoji: false
         }
         this.handleSend = this.handleSend.bind(this);
+        
     }
 
     handleSend(){
+        
         const {store} = this.props;
-        const {newMessage} = this.state;
+        let {newMessage} = this.state;
         const messageId = new ObjectID().toString();
         const channel = store.getActiveChannel();
         const channelId = _.get(channel, '_id', null);
         const currentUser = store.getCurrentUser();
+        if (newMessage.length > 0) {
+            const message = {
+                _id: messageId,
+                channelId: channelId,
+                body: newMessage,
+                author: _.get(currentUser, 'name', null),
+                avatar: avatar, 
+                me: true,
+            }
+            store.addMessage(messageId, message);
 
-        const message = {
-            _id: messageId,
-            channelId: channelId,
-            body: newMessage,
-            author: _.get(currentUser, 'name', null),
-            avatar: avatar, 
-            me: true,
+            this.setState({
+                newMessage: ''
+            })
+            if(this.state.showEmoji) {
+                this.showhideEmoji();
+            }
         }
-        store.addMessage(messageId, message);
-
+    }
+    
+    addEmoji = (e) => {
+        console.log('1');
+        let emojiPic = String.fromCodePoint(`0x${e.unified}`);
         this.setState({
-            newMessage: ''
-        })
+            newMessage: this.state.newMessage + emojiPic
+        });
+    }
+
+    showhideEmoji = () => {
+        this.setState({ 
+            showEmoji: !this.state.showEmoji 
+        });
     }
 
     render() {
@@ -42,15 +65,21 @@ export default class Sender extends Component {
                 <div className='text-input'>
                     <textarea onKeyUp={(event)=>{
                         if(event.key  === 'Enter' && !event.shiftKey){
-                            this,this.handleSend()
+                            this.handleSend();
                         }
                     }} onChange={(event)=>{
                         this.setState({newMessage: _.get(event, 'target.value')})
-                    }} value={this.state.newMessage}placeholder='Write your message...' />
+                    }} 
+                    value={this.state.newMessage} 
+                    placeholder='Write your message...' />
+                </div>
+                <div className='actions'>
+                    <button onClick={this.showhideEmoji} className='send'>Emoji</button>
                 </div>
                 <div className='actions'>
                     <button onClick={this.handleSend} className='send'>Send</button>
                 </div>
+                { this.state.showEmoji ? <Picker onSelect={this.addEmoji} style={{ position: 'absolute', bottom: '70px', right: '300px'}}/> : null }
             </div> 
         );
     }
