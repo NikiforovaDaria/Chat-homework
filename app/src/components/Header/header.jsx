@@ -11,9 +11,9 @@ export default class Header extends Component {
         return (
             <div className='header'>
                 <div className='left'>
-                    <div className='actions'>
-                        <button>New message</button>
-                    </div>
+                    <button className='left-action'><i className='icon-settings-streamline-1'/></button>
+                    <button className='rignt-action'><i className='icon-edit-modify-streamline'/></button>
+                    <h2>Messenger</h2>
                 </div>
                 <div className='content'>
                     <h2>
