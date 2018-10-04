@@ -90,7 +90,7 @@ body {
 }
 .app-messenger .main .content .messenger-input {
   border-top: 1px solid rgba(0, 0, 0, 0.05);
-  height: 10%;
+  height: 50px;
   display: flex;
   flex-direction: row;
 }
