@@ -8,30 +8,19 @@ import _ from "lodash";
 class LeftSideBar extends Component {
     constructor(props) {
         super(props);
-        this.addTestMessages = this.addTestMessages.bind(this);
+        this.renderChannelTitle = this.renderChannelTitle.bind(this);
     }
-    addTestMessages() {
-        const {store} =  this.props;
-        for (let c=0; c < 10; c++){
-            let newChannel ={
-                _id: `${c}`,
-                title: `Channel title ${c}`,
-                lastMessage: `Hey there...${c}`,
-                members: new OrderedMap({
-                    '2': true,
-                    '3': true,
-                    '1': true
-                }),
-                messages: new OrderedMap(),
-            }
-            const msgId = `${c}`
-            newChannel.messages = newChannel.messages.set(msgId, true)
 
-            store.addChannel(c, newChannel)
-        }
-    }
-    componentDidMount() {
-        this.addTestMessages()
+    renderChannelTitle(channel = {}) {
+        const {store} = this.props;
+        const members = store.getMembersFromChannel(channel);
+        const names = [];
+        members.forEach((user) => {
+            const name = _.get(user, 'name');
+            names.push(name);
+        })
+        return <h2>{_.join(names, ', ')}</h2>
+
     }
     
     render() {
@@ -51,7 +40,7 @@ class LeftSideBar extends Component {
                                     <img src={avatar} alt='' />
                                 </div>
                                 <div className='channel-info'>
-                                    <h2>{channel.title}</h2>
+                                    {this.renderChannelTitle(channel)}
                                     <p>{channel.lastMessage}</p>
                                 </div>
                             </div>

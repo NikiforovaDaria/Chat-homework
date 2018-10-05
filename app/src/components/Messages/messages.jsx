@@ -14,7 +14,6 @@ export default class  Messages extends Component {
             newMessage: 'Hello there!!!',
         }
 
-        this.addTestMessages = this.addTestMessages.bind(this);
         this.scrollMessagesToBottom = this.scrollMessagesToBottom.bind(this);
     }
 
@@ -22,30 +21,6 @@ export default class  Messages extends Component {
         if(this.messagesRef) {
             this.messagesRef.scrollTop = this.messagesRef.scrollHeight;
         }
-    }
-
-    addTestMessages() {
-        let {store} = this.props;
-
-        for (let i = 0; i < 20; i++) {
-            let isMe = false;
-            if (i % 2 === 0) {
-                isMe = true;
-            }
-            const newMsg = {
-                _id: `${i}`,
-                author: `Author ${i}`,
-                body: `The body of message ${i}`,
-                avatar: avatar,
-                me: isMe,
-            }
-
-            store.addMessage(i, newMsg);
-        }
-    }    
-
-    componentDidMount(){
-        this.addTestMessages()
     }
 
     componentDidUpdate() {

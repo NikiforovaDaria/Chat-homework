@@ -62,27 +62,33 @@ export default class Sender extends Component {
     }
 
     render() {
+        const { store } = this.props;
+        const activeChannel = store.getActiveChannel();
         return (
-            <div className='messenger-input'>
-                <div className='text-input'>
-                    <textarea onKeyUp={(event)=>{
-                        if(event.key  === 'Enter' && !event.shiftKey){
-                            this.handleSend();
-                        }
-                    }} onChange={(event)=>{
-                        this.setState({newMessage: _.get(event, 'target.value')})
-                    }} 
-                    value={this.state.newMessage} 
-                    placeholder='Write your message...' />
+            <div>
+            { activeChannel ? 
+                <div className='messenger-input'>
+                    <div className='text-input'>
+                        <textarea onKeyUp={(event)=>{
+                            if(event.key  === 'Enter' && !event.shiftKey){
+                                this.handleSend();
+                            }
+                        }} onChange={(event)=>{
+                            this.setState({newMessage: _.get(event, 'target.value')})
+                        }} 
+                        value={this.state.newMessage} 
+                        placeholder='Write your message...' />
+                    </div>
+                    <div className='actions'>
+                        <button onClick={this.showhideEmoji} className='send'>Emoji</button>
+                    </div>
+                    <div className='actions'>
+                        <button onClick={this.handleSend} className='send'>Send</button>
+                    </div>
+                    { this.state.showEmoji ? <Picker onSelect={this.addEmoji} style={{ position: 'absolute', bottom: '70px', right: '300px'}}/> : null }
+                </div> 
+                : null }
                 </div>
-                <div className='actions'>
-                    <button onClick={this.showhideEmoji} className='send'>Emoji</button>
-                </div>
-                <div className='actions'>
-                    <button onClick={this.handleSend} className='send'>Send</button>
-                </div>
-                { this.state.showEmoji ? <Picker onSelect={this.addEmoji} style={{ position: 'absolute', bottom: '70px', right: '300px'}}/> : null }
-            </div> 
         );
     }
 }
