@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "install:app": "cd app && npm install",
     "install:server": "cd server && npm install",
-    "install": "npm run install:app && npm run install:server"
+    "install": "npm run install:app && npm run install:server",
+    "start": "cd app && npm start"
   },
   "repository": {
     "type": "git",
