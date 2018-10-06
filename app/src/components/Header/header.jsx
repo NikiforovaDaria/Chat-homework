@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import avatar from "../../images/avatar.png";
 import _ from "lodash";
 import { ObjectID } from '../../Helpers/objectid';
-import { OrderedMap } from "immutable";
-import SearchUser from "../SearchUser/searchUser";
+import { OrderedMap } from 'immutable';
+import SearchUser from '../SearchUser/searchUser';
+import UserBar from '../UserBar/userBar';
 
 
 export default class Header extends Component {
@@ -20,19 +21,22 @@ export default class Header extends Component {
 
     _onCreateChannel() {
         const {store} = this.props;
+        const currentUser = store.getCurrentUser();
+        const currentUserId = _.get(currentUser, '_id');
 
         const channelId = new ObjectID().toString();
 
         const channel = {
             _id: channelId,
-            title: `New message`,
+            title: ``,
             lastMessage: ``,
             members: new OrderedMap(),
             messages: new OrderedMap(),
             isNew: true,
+            userId: currentUserId,
             created: new Date(),
         }
-
+        channel.members = channel.members.set(currentUserId, true);
         store.onCreateNewChannel(channel);
     }
 
@@ -40,17 +44,24 @@ export default class Header extends Component {
         const { store } = this.props;
         //const channels = store.getChannels();
         const activeChannel = store.getActiveChannel();
+        const members = store.getMembersFromChannel(activeChannel);
         return (
             <div className='header'>
                 <div className='left'>
                     <button className='left-action'><i className='icon-settings-streamline-1'/></button>
                     <h2>Messenger</h2>
                     <button className='right-action' onClick={this._onCreateChannel}><i className='icon-edit-modify-streamline'/></button>
-                    
                 </div>
                 <div className='content'>
                 {_.get(activeChannel, 'isNew') ? <div className='toolbar'>
                         <label>To: </label>
+                        {
+                            members.map((user, key) => {
+                                return <span key={key} onClick={() => {
+                                    store.removeMemberFromChannel(activeChannel, user);
+                                }}>{user.name}</span>
+                            })
+                        }
                         <input type='text' value={this.state.searchUser} placeholder='Type name of person...'
                         onChange={(event) => {
                             const searchUserText = _.get(event, 'target.value');
@@ -72,17 +83,12 @@ export default class Header extends Component {
                                 store.addUserToChannel(channelId, userId);
                             })
                         }}/> : null }
-                    </div> : <h2> {_.get(activeChannel, 'title', '')} </h2>
+                    </div> : store.renderChannelTitle(activeChannel)
                 }
                     
                 </div>
                 <div className='right'>
-                    <div className='user-bar'>
-                        <div className='profile-name'>Daria Nikiforova</div>
-                        <div className='profile-image'>
-                            <img src={avatar} alt='' />
-                        </div>
-                    </div>
+                    <UserBar store={store}/>
                 </div>
             </div>
         );

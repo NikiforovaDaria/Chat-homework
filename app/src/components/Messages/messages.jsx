@@ -36,14 +36,15 @@ export default class  Messages extends Component {
             <div className='content'>
                 <div className='messages' ref={(ref) => this.messagesRef = ref}>
                     {messages.map((message, index) => {
+                        const user = _.get(message, 'user');
                         return (
                             <div key={index} className={classNames('message', { 'me': message.me })}>
                                 <div className='message-user-image'>
-                                    <img src={message.avatar} alt='' />
+                                    <img src={_.get(user, 'avatar')} alt='' />
                                 </div>
                                 <div className='message-body'>
                                     <div className='message-author'>
-                                        {message.me ? 'You ' : message.author} says:
+                                        {message.me ? 'You ' : _.get(user, 'name')} says:
                                     </div>
                                     <div className='message-text'>
                                         <ReactMarkdown source={(message.body).replace(/\n/g, '\n\n')}/>

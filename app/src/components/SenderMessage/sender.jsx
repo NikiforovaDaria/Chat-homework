@@ -31,8 +31,7 @@ export default class Sender extends Component {
                     _id: messageId,
                     channelId: channelId,
                     body: newMessage,
-                    author: _.get(currentUser, 'name', null),
-                    avatar: avatar, 
+                    userId: _.get(currentUser, '_id'),
                     me: true,
                 }
                 store.addMessage(messageId, message);
@@ -48,7 +47,6 @@ export default class Sender extends Component {
     }
     
     addEmoji = (e) => {
-        console.log('1');
         let emojiPic = String.fromCodePoint(`0x${e.unified}`);
         this.setState({
             newMessage: this.state.newMessage + emojiPic
@@ -63,10 +61,12 @@ export default class Sender extends Component {
 
     render() {
         const { store } = this.props;
+        const members = store.getMembersFromChannel(activeChannel);
         const activeChannel = store.getActiveChannel();
         return (
             <div>
-            { activeChannel ? 
+            { activeChannel //&& members.size > 0 
+            ? 
                 <div className='messenger-input'>
                     <div className='text-input'>
                         <textarea onKeyUp={(event)=>{
