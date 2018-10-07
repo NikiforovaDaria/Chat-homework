@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import avatar from "../../images/avatar.png";
-import { OrderedMap } from "immutable";
 import classNames from "classnames";
 import _ from "lodash";
 
@@ -8,30 +6,18 @@ import _ from "lodash";
 class LeftSideBar extends Component {
     constructor(props) {
         super(props);
-        this.addTestMessages = this.addTestMessages.bind(this);
+        this.renderChannelAvatars = this.renderChannelAvatars.bind(this);
     }
-    addTestMessages() {
-        const {store} =  this.props;
-        for (let c=0; c < 10; c++){
-            let newChannel ={
-                _id: `${c}`,
-                title: `Channel title ${c}`,
-                lastMessage: `Hey there...${c}`,
-                members: new OrderedMap({
-                    '2': true,
-                    '3': true,
-                    '1': true
-                }),
-                messages: new OrderedMap(),
-            }
-            const msgId = `${c}`
-            newChannel.messages = newChannel.messages.set(msgId, true)
 
-            store.addChannel(c, newChannel)
-        }
-    }
-    componentDidMount() {
-        this.addTestMessages()
+    renderChannelAvatars(channel) {
+        const { store } = this.props;
+        const members = store.getMembersFromChannel(channel);
+        const maxDisplay = 4;
+        const total = members.size > maxDisplay ? maxDisplay : members.size;
+        const avatars = members.map((user, index) => {
+            return index < maxDisplay ? <img key={index} src={_.get(user, 'avatar')} alt={_.get(user, 'name')}/> : null;
+        });
+        return <div className={classNames('channel-avatars', `channel-avatars-${total}`)}>{avatars}</div>
     }
     
     render() {
@@ -43,15 +29,18 @@ class LeftSideBar extends Component {
                 <div className='channels'>
                     {channels.map((channel, key) => {
                         return (
-                            <div onClick={(key)=>   {
+                            <div 
+                            key={channel._id} 
+                            className={classNames('channel', {'notify': _.get(channel, 'notify') === true}, 
+                            {'active': _.get(activeChannel, '_id') === _.get(channel, '_id', null)})}
+                            onClick={(key)=> {
                                 store.setActiveChannelId(channel._id)
-                            }} 
-                            key={channel._id} className={classNames('channel', {'active': _.get(activeChannel, '_id') === _.get(channel, '_id', null)})}>
+                            }} >
                                 <div className='user-image'>
-                                    <img src={avatar} alt='' />
+                                    {this.renderChannelAvatars(channel)}
                                 </div>
                                 <div className='channel-info'>
-                                    <h2>{channel.title}</h2>
+                                    {store.renderChannelTitle(channel)}
                                     <p>{channel.lastMessage}</p>
                                 </div>
                             </div>
