@@ -193,6 +193,7 @@ export default class User {
             return callback(null, userFormatted);
         });
     }
+
     create(user) {
         const db = this.app.db;
         console.log("User:", user)

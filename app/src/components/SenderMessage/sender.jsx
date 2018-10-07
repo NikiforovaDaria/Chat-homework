@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { ObjectID } from '../../Helpers/objectid';
-import avatar from "../../images/avatar.png";
 import _ from "lodash";
-import 'emoji-mart/css/emoji-mart.css'
-import { Picker } from 'emoji-mart'
+import 'emoji-mart/css/emoji-mart.css';
+import { Picker } from 'emoji-mart';
 
 export default class Sender extends Component {
     constructor(props){
@@ -61,11 +60,11 @@ export default class Sender extends Component {
 
     render() {
         const { store } = this.props;
-        const members = store.getMembersFromChannel(activeChannel);
         const activeChannel = store.getActiveChannel();
+        const members = store.getMembersFromChannel(activeChannel);
         return (
             <div>
-            { activeChannel //&& members.size > 0 
+            { activeChannel && members.size > 0 
             ? 
                 <div className='messenger-input'>
                     <div className='text-input'>
@@ -76,14 +75,14 @@ export default class Sender extends Component {
                         }} onChange={(event)=>{
                             this.setState({newMessage: _.get(event, 'target.value')})
                         }} 
-                        value={this.state.newMessage} 
+                        value={this.state.newMessage}
                         placeholder='Write your message...' />
                     </div>
                     <div className='actions'>
-                        <button onClick={this.showhideEmoji} className='send'>Emoji</button>
+                        <button onClick={this.showhideEmoji} className='send'><i className="fas fa-smile"></i></button>
                     </div>
                     <div className='actions'>
-                        <button onClick={this.handleSend} className='send'>Send</button>
+                        <button onClick={this.handleSend} className='send'><i className="fab fa-telegram-plane"></i></button>
                     </div>
                     { this.state.showEmoji ? <Picker onSelect={this.addEmoji} style={{ position: 'absolute', bottom: '70px', right: '300px'}}/> : null }
                 </div> 

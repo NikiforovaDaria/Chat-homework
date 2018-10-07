@@ -44,7 +44,7 @@ export default class UserForm extends Component {
             message: null,
         }, () => {
             if(isLogin){
-                store.login(user.email, user.password).then((user) => {
+                store.login(user.email, user.password).then(() => {
                     if (this.props.onClose) {
                         this.props.onClose();
                     }

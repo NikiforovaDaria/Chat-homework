@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import avatar from "../../images/avatar.png";
-import { OrderedMap } from "immutable";
 import classNames from "classnames";
 import _ from "lodash";
 

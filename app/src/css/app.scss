@@ -126,12 +126,13 @@ body{
                 .actions{
                     
                     button.send{
+                        margin-right: 1px;
                         background-color: #22a6b3;
                         color: white;
                         border: 0 none;
-                        padding: 8px 15px;
+                        padding: 4px 15px;
                         line-height: 50px;
-                        font-size: 15px; 
+                        font-size: 25px; 
                     }
                 }
             }
@@ -586,3 +587,6 @@ h2.title{
     color: #FC427B;
 }
   
+.user-profile {
+    background: rgba(0, 0, 0, 0.05);
+}

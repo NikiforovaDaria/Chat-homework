@@ -39,7 +39,7 @@ export default class Message {
                     $project: {
                         _id: true,
                         channelId: true,
-                        user: {_id: true, name: true, created: true, online: true},
+                        user: {_id: true, name: true, created: true, online: true, email: true},
                         userId: true,
                         body: true,
                         created: true,

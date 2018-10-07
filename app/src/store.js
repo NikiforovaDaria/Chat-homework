@@ -150,8 +150,6 @@ export default class Store{
     }
 
     setMessage(message, notify = false) {
-        
-        console.log(notify);
         const id = _.toString(_.get(message, '_id'));
         this.messages = this.messages.set(id, message);
         const channelId = _.toString(message.channelId);

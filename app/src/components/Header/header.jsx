@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import avatar from "../../images/avatar.png";
 import _ from "lodash";
 import { ObjectID } from '../../Helpers/objectid';
 import { OrderedMap } from 'immutable';
@@ -48,9 +47,13 @@ export default class Header extends Component {
         return (
             <div className='header'>
                 <div className='left'>
-                    <button className='left-action'><i className='icon-settings-streamline-1'/></button>
+                    <span className='left-action'>
+                        <i className="far fa-comments" style={{color: '#22a6b3', fontSize: '32px', padding: '8px 8px 0 0'}}></i>
+                    </span>
                     <h2>Messenger</h2>
-                    <button className='right-action' onClick={this._onCreateChannel}><i className='icon-edit-modify-streamline'/></button>
+                    <button className='right-action' onClick={this._onCreateChannel}>
+                        <i className="fas fa-plus" style={{color: '#22a6b3', fontSize: '32px', padding: '8px 6px 0 0'}}></i>
+                    </button>
                 </div>
                 <div className='content'>
                 {_.get(activeChannel, 'isNew') ? <div className='toolbar'>

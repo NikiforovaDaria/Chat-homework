@@ -8,7 +8,9 @@
     "install:app": "cd app && npm install",
     "install:server": "cd server && npm install",
     "install": "npm run install:app && npm run install:server",
-    "start": "cd app && npm start"
+    "start:app": "cd app && npm start",
+    "start:server": "cd server && npm run dev",
+    "start:mongo": "mongod"
   },
   "repository": {
     "type": "git",

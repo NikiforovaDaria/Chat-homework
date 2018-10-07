@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import avatar from "../../images/avatar.png";
 import classNames from "classnames";
 import _ from "lodash";
 import Sender from '../SenderMessage/sender'

@@ -27,12 +27,18 @@ export default class UserBar extends Component {
                         showUserForm: true,
                     })
                 }} type="button" className="login-btn">Sign In</button> : null}
-                <div className="profile-name">{_.get(me, 'name')}</div>
+                <div className="profile-name"onClick={() => {
+                    this.setState({
+                        showUserMenu: true,
+                    })
+                }}>{_.get(me, 'name')}</div>
+
                 <div className="profile-image" onClick={() => {
                     this.setState({
                         showUserMenu: true,
                     })
                 }}><img src={profilePicture ? profilePicture : avatar} alt=""/></div>
+                
                 {!me && this.state.showUserForm ? <UserForm onClose={(msg) => {
                     this.setState({
                         showUserForm: false,

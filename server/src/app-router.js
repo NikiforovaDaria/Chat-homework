@@ -106,7 +106,6 @@ export default class AppRouter {
          **/
         app.get('/api/channels/:id', (req, res, next) => {
             const channelId = _.get(req, 'params.id');
-            console.log(channelId);
             if (!channelId) {
                 return res.status(404).json({error: {message: "Not found."}});
             }
@@ -145,7 +144,6 @@ export default class AppRouter {
                 let filter = _.get(req, 'query.filter', null);
                 if (filter) {
                     filter = JSON.parse(filter);
-                    console.log(filter);
                 }
                 const channelId = _.toString(_.get(req, 'params.id'));
                 const limit = _.get(filter, 'limit', 50);
@@ -210,7 +208,8 @@ export default class AppRouter {
                                 _id: true,
                                 name: true,
                                 created: true,
-                                online: true
+                                online: true,
+                                email: true
                             },
                             members: true,
                         }

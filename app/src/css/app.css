@@ -170,12 +170,13 @@ body {
   padding: 8px;
 }
 .app-messenger .main .content .messenger-input .actions button.send {
+  margin-right: 1px;
   background-color: #22a6b3;
   color: white;
   border: 0 none;
-  padding: 8px 15px;
+  padding: 4px 15px;
   line-height: 50px;
-  font-size: 15px;
+  font-size: 25px;
 }
 .app-messenger .messages {
   display: flex;
@@ -590,6 +591,10 @@ h2.title {
   font-size: 10px;
   padding: 0 10px;
   color: #FC427B;
+}
+
+.user-profile {
+  background: rgba(0, 0, 0, 0.05);
 }
 
 /*# sourceMappingURL=app.css.map */
