@@ -187,7 +187,7 @@ body {
   display: flex;
   margin: 20px;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 .app-messenger .messages .message .message-user-image img {
   width: 30px;
@@ -199,16 +199,16 @@ body {
   padding-left: 10px;
 }
 .app-messenger .messages .message .message-body .message-text {
-  background: #22a6b3;
+  background: #d1ccc0;
   color: white;
   padding: 10px;
   border-radius: 10px;
 }
 .app-messenger .messages .message.me {
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 .app-messenger .messages .message.me .message-text {
-  background: #d1ccc0;
+  background: #22a6b3;
 }
 
 .channels {
@@ -218,14 +218,86 @@ body {
 .channels .channel {
   padding-bottom: 10px;
   display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.channels .channel .user-image {
+  width: 50px;
 }
 .channels .channel .user-image img {
-  width: 35px;
-  height: 35px;
+  max-width: 100%;
+}
+.channels .channel .user-image .channel-avatars {
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  top: 5px;
   border-radius: 50%;
-  margin-right: 10px;
+  background-color: #ccc;
+  position: relative;
+}
+.channels .channel .user-image .channel-avatars.channel-avatars-1 img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.channels .channel .user-image .channel-avatars.channel-avatars-2 img {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.channels .channel .user-image .channel-avatars.channel-avatars-2 img:first-child {
+  left: 0;
+  top: 0;
+}
+.channels .channel .user-image .channel-avatars.channel-avatars-3 img {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  right: 0;
+  top: 0;
+}
+.channels .channel .user-image .channel-avatars.channel-avatars-3 img:first-child {
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+}
+.channels .channel .user-image .channel-avatars.channel-avatars-3 img:last-child {
+  bottom: 0;
+  right: 0;
+  top: 20px;
+  width: 50%;
+  height: 50%;
+}
+.channels .channel .user-image .channel-avatars.channel-avatars-4 img {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  right: 0;
+  top: 0;
+}
+.channels .channel .user-image .channel-avatars.channel-avatars-4 img:first-child {
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+}
+.channels .channel .user-image .channel-avatars.channel-avatars-4 img:nth-child(3n) {
+  bottom: 0;
+  right: 0;
+  top: 20px;
+  width: 50%;
+  height: 50%;
+}
+.channels .channel .user-image .channel-avatars.channel-avatars-4 img:last-child {
+  left: 0;
+  bottom: 0;
+  top: 20px;
 }
 .channels .channel .channel-info {
+  padding-top: 8px;
   flex-grow: 1;
 }
 .channels .channel .channel-info h2 {
@@ -238,15 +310,38 @@ body {
 .channels .channel.active {
   background: rgba(0, 0, 0, 0.05);
 }
+.channels .channel.notify .channel-info p {
+  color: #0B6B74;
+  font-weight: bold;
+}
 
 .members .member {
   display: flex;
   padding: 10px;
 }
+.members .member .user-image {
+  position: relative;
+}
 .members .member .user-image img {
   width: 35px;
   height: 35px;
   border-radius: 50%;
+}
+.members .member .user-image .user-status {
+  width: 10px;
+  height: 10px;
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 6px;
+  border: 1px solid #FFFFFF;
+  background: #cccccc;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+.members .member .user-image .user-status.online {
+  background: #FC427B;
 }
 .members .member .member-info {
   padding-left: 10px;
@@ -479,16 +574,22 @@ h2.title {
 
 .user-status {
   font-size: 10px;
-  color: blue;
+  color: #d1ccc0;
 }
 .user-status.online {
-  color: #22a6b3;
+  color: #FC427B;
 }
 
 .app-warning-state {
   font-size: 10px;
   padding: 0 10px;
   color: red;
+}
+
+.app-warning-state {
+  font-size: 10px;
+  padding: 0 10px;
+  color: #FC427B;
 }
 
 /*# sourceMappingURL=app.css.map */

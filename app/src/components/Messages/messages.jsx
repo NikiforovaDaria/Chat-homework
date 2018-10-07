@@ -44,7 +44,7 @@ export default class  Messages extends Component {
                                 </div>
                                 <div className='message-body'>
                                     <div className='message-author'>
-                                        {message.me ? 'You ' : _.get(user, 'name')} says:
+                                        {message.me ? 'You ' : _.get(message, 'user.name')} says:
                                     </div>
                                     <div className='message-text'>
                                         <ReactMarkdown source={(message.body).replace(/\n/g, '\n\n')}/>

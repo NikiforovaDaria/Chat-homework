@@ -131,14 +131,14 @@ export default class User {
         const fields = ['name', 'email', 'password'];
         const validations = {
             name: {
-                errorMesage: 'Name is required',
+                errorMessage: 'Name is required',
                 do: () => {
                     const name = _.get(user, 'name', '');
                     return name.length;
                 }
             },
             email: {
-                errorMesage: 'Email is not correct',
+                errorMessage: 'Email is not correct',
                 do: () => {
                     const email = _.get(user, 'email', '');
                     if (!email.length || !isEmail(email)) {
@@ -148,7 +148,7 @@ export default class User {
                 }
             },
             password: {
-                errorMesage: 'Password is required and more than 3 characters',
+                errorMessage: 'Password is required and more than 3 characters',
                 do: () => {
                     const password = _.get(user, 'password', '');
                     if (!password.length || password.length < 3) {
@@ -164,7 +164,7 @@ export default class User {
             if (fieldValidation) {
                 // do check/
                 const isValid = fieldValidation.do();
-                const msg = fieldValidation.errorMesage;
+                const msg = fieldValidation.errorMessage;
                 if (!isValid) {
                     errors.push(msg);
                 }

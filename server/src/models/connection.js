@@ -15,7 +15,7 @@ export default class Connection {
             messageObject = JSON.parse(msg);
         }
         catch (err) {
-            console.log("An error decode the socket mesage", msg);
+            console.log("An error decode the socket Message", msg);
         }
         return messageObject;
     }
@@ -119,9 +119,9 @@ export default class Connection {
                 let channel = payload;
                 const userId = userConnection.userId;
                 channel.userId = userId;
-                this.app.models.channel.create(channel).then((chanelObject) => {
+                this.app.models.channel.create(channel).then((channelObject) => {
                     let memberConnections = [];
-                    const memberIds = _.get(chanelObject, 'members', []);
+                    const memberIds = _.get(channelObject, 'members', []);
                     const query = {
                         _id: {$in: memberIds}
                     };
@@ -131,7 +131,7 @@ export default class Connection {
                         created: 1,
                     }
                     this.app.models.user.find(query, queryOptions).then((users) => {
-                        chanelObject.users = users;
+                        channelObject.users = users;
                         _.each(memberIds, (id) => {
                             const userId = id.toString();
                             const memberConnection = this.connections.filter((con) => `${con.userId}` === userId);
@@ -140,7 +140,7 @@ export default class Connection {
                                     const ws = con.ws;
                                     const obj = {
                                         action: 'channel_added',
-                                        payload: chanelObject,
+                                        payload: channelObject,
                                     }
                                     this.send(ws, obj);
                                 })

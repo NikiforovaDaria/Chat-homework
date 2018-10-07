@@ -18,11 +18,10 @@ export default class UserBar extends Component {
         const {store} = this.props;
         const me = store.getCurrentUser();
         const profilePicture = _.get(me, 'avatar');
-        // // We'll create isConnected in the feature 
-        // const isConnected = store.isConnected();
+        const isConnected = store.isConnected();
         return (
             <div className="user-bar">
-                <div className="app-warning-state">Reconnecting... </div> 
+                {me && !isConnected ? <div className="app-warning-state">Reconnecting... </div> : null}
                 {!me ? <button onClick={() => {
                     this.setState({
                         showUserForm: true,

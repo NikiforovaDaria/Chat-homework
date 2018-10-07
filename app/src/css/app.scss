@@ -6,16 +6,19 @@ body, html {
     padding: 0;
     height: 100%;
 }
+
 body{
     font-family: 'Abel', sans-serif;
     color: #22a6b3;
     font-size: 18px;
 }
+
 *{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
+
 .app-messenger{
     display: flex;
     flex-direction: column;
@@ -144,7 +147,7 @@ body{
             display: flex;
             margin: 20px;
             flex-direction: row;
-            justify-content: flex-end;
+            justify-content: flex-start;
             .message-user-image{
                 img{
                     width: 30px;
@@ -159,17 +162,17 @@ body{
 
                 }
                 .message-text{
-                    background: #22a6b3;
+                    background: #d1ccc0;
                     color: white;
                     padding: 10px;
                     border-radius: 10px;
                 }
             }
             &.me{
-                justify-content: flex-start;
+                justify-content: flex-end;
                 .message-text{
                     
-                    background: #d1ccc0;
+                    background: #22a6b3;
                 }
             }
         }
@@ -183,17 +186,96 @@ body{
     .channel {
         padding-bottom: 10px;
         display: flex;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         .user-image {
-            img{
-                width: 35px;
-                height: 35px;
+            width: 50px;
+            img {
+                max-width: 100%;
+            }
+            .channel-avatars {
+                overflow: hidden;
+                width: 40px;
+                height: 40px;
+                top: 5px;
                 border-radius: 50%;
-                margin-right: 10px;
+                background-color: #ccc;
+                position: relative;
+
+                &.channel-avatars-1 {
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                    }
+                }
+                &.channel-avatars-2 {
+                    img {
+                        width: 50%;
+                        height: 100%;
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        &:first-child {
+                            left: 0;
+                            top: 0;
+                        }
+                    }
+                }
+                &.channel-avatars-3 {
+                    img {
+                        position: absolute;
+                        width: 50%;
+                        height: 50%;
+                        right: 0;
+                        top: 0;
+                        &:first-child {
+                            left: 0;
+                            top: 0;
+                            width: 50%;
+                            height: 100%;
+                        }
+                        &:last-child {
+                            bottom: 0;
+                            right: 0;
+                            top: 20px;
+                            width: 50%;
+                            height: 50%;
+                        }
+                    }
+                }
+                &.channel-avatars-4 {
+                    img {
+                        position: absolute;
+                        width: 50%;
+                        height: 50%;
+                        right: 0;
+                        top: 0;
+                        &:first-child {
+                            left: 0;
+                            top: 0;
+                            width: 50%;
+                            height: 100%;
+                        }
+                        &:nth-child(3n) {
+                            bottom: 0;
+                            right: 0;
+                            top: 20px;
+                            width: 50%;
+                            height: 50%;
+                        }
+                        &:last-child {
+                            left: 0;
+                            bottom: 0;
+                            top: 20px;
+                        }
+
+                    }
+                }
             }
         }
 
         .channel-info {
-
+            padding-top: 8px;
             flex-grow: 1;
             h2 {
                 font-size: 14px;
@@ -208,6 +290,14 @@ body{
         &.active{
             background: rgba(0, 0, 0, 0.05);
         }
+        &.notify { 
+            .channel-info {
+                p {
+                    color: #0B6B74;
+                    font-weight: bold;
+                }
+            }
+        }
     }
 }
 .members{
@@ -215,10 +305,27 @@ body{
         display: flex;
         padding: 10px;
         .user-image{
+            position: relative;
             img{
                 width: 35px;
                 height: 35px;
                 border-radius: 50%;
+            }
+            .user-status{
+                width: 10px;
+                height: 10px;
+                display: block;
+                position: absolute;
+                right: 0;
+                bottom: 6px;
+                border: 1px solid #FFFFFF;
+                background: #cccccc;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                border-radius: 50%;
+                &.online{
+                    background: #FC427B;
+                }
             }
 
         }
@@ -309,80 +416,78 @@ h2.title{
 .user-bar {
     position: relative;
     button.login-btn {
-      height: 50px;
-      border: 0 none;
-      background: none;
-      color: #22a6b3;
-      font-weight: 600;
-      font-size: 14px;
+        height: 50px;
+        border: 0 none;
+        background: none;
+        color: #22a6b3;
+        font-weight: 600;
+        font-size: 14px;
     }
   
     .user-form {
-      background: #FFF;
-      box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.09);
-      position: absolute;
-      top: 50px;
-      right: 0;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      border-top: 0 none;
-      padding: 10px;
-      .form-item {
-        label {
-          line-height: 30px;
-          min-width: 75px;
-          text-align: right;
-          margin-right: 8px;
+        background: #FFF;
+        box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.09);
+        position: absolute;
+        top: 50px;
+        right: 0;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        border-top: 0 none;
+        padding: 10px;
+        .form-item {
+            label {
+                line-height: 30px;
+                min-width: 75px;
+                text-align: right;
+                margin-right: 8px;
+            }
+            input[type="email"], input[type="password"], input[type="text"] {
+                height: 30px;
+                line-height: 30px;
+            }
         }
-        input[type="email"], input[type="password"], input[type="text"] {
-  
-          height: 30px;
-          line-height: 30px;
-  
+        .form-actions {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
         }
-      }
-      .form-actions {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-      }
     }
     .user-menu {
-      background: #FFF;
-      box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.09);
-      min-width: 200px;
-      position: absolute;
-      right: 0;
-      top: 50px;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      border-top: 0 none;
-      ul {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        li {
-          border-top: 1px solid rgba(0, 0, 0, 0.05);
-          padding: 8px;
-          button {
-            background: none;
-            border: 0 none;
-            display: block;
-            cursor: pointer;
-            text-align: center;
-            width: 100%;
-          }
-          &:hover {
-            background: rgba(0, 0, 0, 0.09);
-  
-          }
+        background: #FFF;
+        box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.09);
+        min-width: 200px;
+        position: absolute;
+        right: 0;
+        top: 50px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        border-top: 0 none;
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            li {
+                border-top: 1px solid rgba(0, 0, 0, 0.05);
+                padding: 8px;
+                button {
+                    background: none;
+                    border: 0 none;
+                    display: block;
+                    cursor: pointer;
+                    text-align: center;
+                    width: 100%;
+                }
+                &:hover {
+                    background: rgba(0, 0, 0, 0.09);
+        
+                }
+            }
         }
-      }
-      h2 {
-        font-size: 14px;
-        font-weight: 600;
-        margin: 0;
-        display: block;
-        text-align: center;
-      }
+        h2 {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0;
+            display: block;
+            text-align: center;
+        }
     }
 }
   
@@ -396,83 +501,88 @@ h2.title{
     border: 1px solid rgba(0, 0, 0, 0.05);
     border-top: 0 none;
     ul {
-      padding: 0;
-      margin: 0;
-      list-style: none;
-      li {
-        border-top: 1px solid rgba(0, 0, 0, 0.05);
-        padding: 8px;
-        button {
-          background: none;
-          border: 0 none;
-          display: block;
-          cursor: pointer;
-          text-align: center;
-          width: 100%;
-        }
-        &:hover {
-          background: rgba(0, 0, 0, 0.09);
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        li {
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 8px;
+            button {
+                background: none;
+                border: 0 none;
+                display: block;
+                cursor: pointer;
+                text-align: center;
+                width: 100%;
+            }
+            &:hover {
+                background: rgba(0, 0, 0, 0.09);
 
+            }
         }
-      }
     }
     h2 {
-      font-size: 14px;
-      font-weight: 600;
-      margin: 0;
-      display: block;
-      text-align: center;
+        font-size: 14px;
+        font-weight: 600;
+        margin: 0;
+        display: block;
+        text-align: center;
     }
 }
 
 .form-item {
-  display: flex;
-  margin-bottom: 10px;
-  label {
-    font-weight: 600;
-  }
-  input[type="email"], input[type="password"], input[type="text"] {
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 3px 8px;
-  }
+    display: flex;
+    margin-bottom: 10px;
+    label {
+        font-weight: 600;
+    }
+    input[type="email"], input[type="password"], input[type="text"] {
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 3px 8px;
+    }
 }
 
 .form-actions {
-  button {
-    border: 0 none;
-    padding: 7px 15px;
-    text-align: center;
-    &.primary {
-      background: #22a6b3;
-      color: #FFF;
+    button {
+        border: 0 none;
+        padding: 7px 15px;
+        text-align: center;
+        &.primary {
+            background: #22a6b3;
+            color: #FFF;
+        }
     }
-  }
 }
 
 .app-message {
-  line-height: 1.5em;
-  padding: 10px;
-  font-size: 12px;
-  text-align: center;
-  border: 1px solid #22a6b3;
-  border-radius: 5px;
-  margin: 0 0 10px 0;
-  &.error {
-    background: red;
-    color: #FFF;
-    border-color: red;
-  }
+    line-height: 1.5em;
+    padding: 10px;
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid #22a6b3;
+    border-radius: 5px;
+    margin: 0 0 10px 0;
+    &.error {
+        background: red;
+        color: #FFF;
+        border-color: red;
+    }
 }
 .user-status{
-  font-size: 10px;
-  color: blue;
-  &.online{
-    color: #22a6b3;
-  }
+    font-size: 10px;
+    color: #d1ccc0;
+    &.online{
+        color: #FC427B;
+    }
 }
 .app-warning-state{
-  font-size: 10px;
-  padding: 0 10px;
-  color: red;
+    font-size: 10px;
+    padding: 0 10px;
+    color: red;
+}
+.app-warning-state{
+    font-size: 10px;
+    padding: 0 10px;
+    color: #FC427B;
 }
   

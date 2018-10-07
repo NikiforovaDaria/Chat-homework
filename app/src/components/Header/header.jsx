@@ -59,7 +59,7 @@ export default class Header extends Component {
                             members.map((user, key) => {
                                 return <span key={key} onClick={() => {
                                     store.removeMemberFromChannel(activeChannel, user);
-                                }}>{user.name}</span>
+                                }}>{_.get(user, 'name')}</span>
                             })
                         }
                         <input type='text' value={this.state.searchUser} placeholder='Type name of person...'
@@ -68,12 +68,14 @@ export default class Header extends Component {
                             this.setState({
                                 searchUser: searchUserText,
                                 showSearchUser: true,
+                            }, () => {
+                                store.startSearchUsers(searchUserText);
                             })
                         }}
                         />
 
                         {this.state.showSearchUser ? 
-                        <SearchUser store={store} search={this.state.searchUser} onSelect={(user) => {
+                        <SearchUser store={store} onSelect={(user) => {
                             this.setState({
                                 showSearchUser: false,
                                 searchUser: '',

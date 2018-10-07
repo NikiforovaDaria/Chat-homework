@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Header/header';
 import LeftSideBar from '../LeftSideBar/leftSideBar';
 import RightSideBar from '../RightSideBar/rightSideBar';
-import Store from "../store";
+import Store from "../../store";
 import Messages from '../Messages/messages';
 
 
