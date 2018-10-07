@@ -77,7 +77,6 @@ export default class Message {
                 if(err){
                     return reject(err);
                 }
-                // let update lastMessgage field to channel
                 this.app.db.collection('channels').findOneAndUpdate({_id: channelId}, {
                     $set: {
                         lastMessage: _.get(message, 'body', ''),

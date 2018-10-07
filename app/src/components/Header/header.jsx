@@ -41,7 +41,7 @@ export default class Header extends Component {
 
     render() {
         const { store } = this.props;
-        //const channels = store.getChannels();
+        const me = store.getCurrentUser();
         const activeChannel = store.getActiveChannel();
         const members = store.getMembersFromChannel(activeChannel);
         return (
@@ -51,9 +51,9 @@ export default class Header extends Component {
                         <i className="far fa-comments" style={{color: '#22a6b3', fontSize: '32px', padding: '8px 8px 0 0'}}></i>
                     </span>
                     <h2>Messenger</h2>
-                    <button className='right-action' onClick={this._onCreateChannel}>
+                    { me ? <button className='right-action' onClick={this._onCreateChannel}>
                         <i className="fas fa-plus" style={{color: '#22a6b3', fontSize: '32px', padding: '8px 6px 0 0'}}></i>
-                    </button>
+                    </button> : null }
                 </div>
                 <div className='content'>
                 {_.get(activeChannel, 'isNew') ? <div className='toolbar'>

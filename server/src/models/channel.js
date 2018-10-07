@@ -26,12 +26,10 @@ export default class Channel {
     load(id) {
         return new Promise((resolve, reject) => {
             id = _.toString(id);
-            // first find in cache
             const channelFromCache = this.channels.get(id);
             if (channelFromCache) {
 				return resolve(channelFromCache);
             }
-            // let find in db
             this.findById(id).then((c) => {
                 this.channels = this.channels.set(id, c);
                 

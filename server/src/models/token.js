@@ -11,9 +11,7 @@ export default class Token{
     logout(token){
 		return new Promise((resolve, reject) => {
             const tokenId = _.toString(token._id);
-            // to remove token from cache
             this.tokens = this.tokens.remove(tokenId);
-            // we have to delete this token id from tokens collection
             this.app.db.collection('tokens').remove({_id: new ObjectID(tokenId)}, (err, info) => {
 					return err ? reject(err) : resolve(info);
             });
@@ -38,7 +36,6 @@ export default class Token{
 	load(id = null){
 		id = `${id}`;
 		return new Promise((resolve, reject) => {
-			// first we check in cache if found dont need to query to database.
 			const tokenFromCache = this.tokens.get(id);
 			if(tokenFromCache){
 				return resolve(tokenFromCache);

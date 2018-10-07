@@ -29,7 +29,7 @@ export default class  Messages extends Component {
     render() {
         const {store} = this.props;
         const activeChannel = store.getActiveChannel();
-        const messages = store.getMessagesFromChannel(activeChannel); //store.getMessages();
+        const messages = store.getMessagesFromChannel(activeChannel); 
     
         return (
             <div className='content'>

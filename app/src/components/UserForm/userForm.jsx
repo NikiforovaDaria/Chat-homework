@@ -65,7 +65,6 @@ export default class UserForm extends Component {
                             type: 'success'
                         }
                     }, () => {
-                        // now login this user
                         store.login(user.email, user.password).then(() => {
                             if (this.props.onClose) {
                                 this.props.onClose();

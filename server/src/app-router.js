@@ -43,7 +43,6 @@ export default class AppRouter {
         app.get('/api/users/me', (req, res, next) => {
             let tokenId = req.get('authorization');
             if (!tokenId) {
-                // get token from query
                 tokenId = _.get(req, 'query.auth');
             }
 
@@ -111,7 +110,6 @@ export default class AppRouter {
             }
 
             app.models.channel.load(channelId).then((channel) => {
-                // fetch all uses belong to memberId
                 const members = channel.members;
                 const query = {
                     _id: {$in: members}
@@ -134,13 +132,10 @@ export default class AppRouter {
         app.get('/api/channels/:id/messages', (req, res, next) => {
             let tokenId = req.get('authorization');
             if (!tokenId) {
-                // get token from query
                 tokenId = _.get(req, 'query.auth');
             }
             app.models.token.loadTokenAndUser(tokenId).then((token) => {
                 const userId = token.userId;
-                // make sure user are logged in
-                // check if this user is inside of channel members. other retun 401.
                 let filter = _.get(req, 'query.filter', null);
                 if (filter) {
                     filter = JSON.parse(filter);
@@ -148,7 +143,6 @@ export default class AppRouter {
                 const channelId = _.toString(_.get(req, 'params.id'));
                 const limit = _.get(filter, 'limit', 50);
                 const offset = _.get(filter, 'offset', 0);
-                // load channel
                 this.app.models.channel.load(channelId).then((c) => {
                     const memberIds = _.get(c, 'members');
                     const members = [];
@@ -177,7 +171,6 @@ export default class AppRouter {
         app.get('/api/me/channels', (req, res, next) => {
             let tokenId = req.get('authorization');
             if (!tokenId) {
-                // get token from query
                 tokenId = _.get(req, 'query.auth');
             }
             app.models.token.loadTokenAndUser(tokenId).then((token) => {
@@ -239,7 +232,6 @@ export default class AppRouter {
         app.get('/api/me/logout', (req, res, next) => {
             let tokenId = req.get('authorization');
             if (!tokenId) {
-                // get token from query
                 tokenId = _.get(req, 'query.auth');
             }
             app.models.token.loadTokenAndUser(tokenId).then((token) => {

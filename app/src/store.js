@@ -163,10 +163,6 @@ export default class Store{
         else {
             this.service.get(`api/channels/${channelId}`).then((response) => {
                 const channel = _.get(response, 'data');
-                /* const users = _.get(channel, 'users');
-                _.each(users, (user) => {
-                    this.addUserToCache(user);
-                });       */
                 this.realtime.onAddChannel(channel);         
             });
         }
@@ -283,7 +279,6 @@ export default class Store{
     }
 
     renderChannelTitle(channel = null) {
-        //const {store} = this.props; 
         const members = this.getMembersFromChannel(channel);
         const names = [];
         members.forEach((user) => {
